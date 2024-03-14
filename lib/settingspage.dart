@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_farmsage/loginpage.dart';
 import 'package:flutter_farmsage/main_page.dart';
 import 'package:flutter_farmsage/profileview.dart';
-import 'package:flutter_farmsage/loginpage.dart'; // Import the LoginPage
+import 'package:flutter_farmsage/help.dart'; // Import the HelpPage
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({Key? key}) : super(key: key);
@@ -22,7 +23,7 @@ class SettingsPage extends StatelessWidget {
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
-                color: Color.fromARGB(255, 18, 82, 20),
+                color: Colors.white,
               ),
             ),
             const SizedBox(height: 20),
@@ -41,8 +42,10 @@ class SettingsPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8.0),
                 ),
               ),
-              icon: const Icon(Icons.person),
-              label: const Text('Profile View'),
+              icon: const Icon(Icons.person,
+                  color: Colors.white), // Changed icon color to white
+              label: const Text('Profile View',
+                  style: TextStyle(color: Colors.white)),
             ),
             const SizedBox(height: 10),
             ElevatedButton.icon(
@@ -56,8 +59,10 @@ class SettingsPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8.0),
                 ),
               ),
-              icon: const Icon(Icons.notifications),
-              label: const Text('Notifications'),
+              icon: const Icon(Icons.notifications,
+                  color: Colors.white), // Changed icon color to white
+              label: const Text('Notifications',
+                  style: TextStyle(color: Colors.white)),
             ),
             const SizedBox(height: 10),
             ElevatedButton.icon(
@@ -71,13 +76,18 @@ class SettingsPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8.0),
                 ),
               ),
-              icon: const Icon(Icons.language),
-              label: const Text('Language'),
+              icon: const Icon(Icons.language,
+                  color: Colors.white), // Changed icon color to white
+              label:
+                  const Text('Language', style: TextStyle(color: Colors.white)),
             ),
             const SizedBox(height: 10),
             ElevatedButton.icon(
               onPressed: () {
-                // Handle help button press
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => HelpPage()),
+                );
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color.fromARGB(255, 18, 72, 20),
@@ -86,8 +96,9 @@ class SettingsPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8.0),
                 ),
               ),
-              icon: const Icon(Icons.help),
-              label: const Text('Help'),
+              icon: const Icon(Icons.help,
+                  color: Colors.white), // Changed icon color to white
+              label: const Text('Help', style: TextStyle(color: Colors.white)),
             ),
             const SizedBox(height: 10),
             ElevatedButton.icon(
@@ -95,7 +106,7 @@ class SettingsPage extends StatelessWidget {
                 // Handle logout button press
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => const LoginPage()),
+                  MaterialPageRoute(builder: (context) => LoginPage()),
                 );
               },
               style: ElevatedButton.styleFrom(
@@ -105,8 +116,10 @@ class SettingsPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8.0),
                 ),
               ),
-              icon: const Icon(Icons.logout),
-              label: const Text('Logout'),
+              icon: const Icon(Icons.logout,
+                  color: Colors.white), // Changed icon color to white
+              label:
+                  const Text('Logout', style: TextStyle(color: Colors.white)),
             ),
           ],
         ),

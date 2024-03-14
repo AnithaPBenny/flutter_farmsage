@@ -25,6 +25,7 @@ class _SoilTestingPageState extends State<SoilTestingPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Soil Testing'),
+        automaticallyImplyLeading: false,
         backgroundColor:
             const Color.fromARGB(255, 21, 71, 23), // Set app bar color to green
       ),
@@ -73,7 +74,7 @@ class _SoilTestingPageState extends State<SoilTestingPage> {
                     backgroundColor: const Color.fromARGB(
                         255, 21, 71, 23), // Change button color to green
                   ),
-                  child: const Text('Test'),
+                  child: const Text('Find'),
                 ),
               ),
             ],

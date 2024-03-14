@@ -9,10 +9,11 @@ class MainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Hello Raina Raj!'),
-        centerTitle: true, // Center the title
+        title: const Text('Hello!'),
+        automaticallyImplyLeading: false,
+        centerTitle: false, // Center the title
         backgroundColor: const Color.fromARGB(
-            255, 10, 64, 12), // Change app bar color to green
+            255, 1, 71, 27), // Change app bar color to green
       ),
       body: Center(
         child: Column(
