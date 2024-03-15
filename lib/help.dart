@@ -7,7 +7,15 @@ class HelpPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Help'),
+        title: const Text(
+          'Help',
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        centerTitle: false, // Center the title
+        backgroundColor: const Color.fromARGB(255, 1, 71, 27),
       ),
       body: const SingleChildScrollView(
         child: Padding(

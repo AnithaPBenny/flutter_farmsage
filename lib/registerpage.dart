@@ -20,7 +20,18 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Sign Up'),
+        title: const Text(
+          'Sign Up',
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+
+        automaticallyImplyLeading: false,
+        centerTitle: false, // Center the title
+        backgroundColor: const Color.fromARGB(
+            255, 1, 71, 27), // Change app bar color to green
       ),
       body: Center(
         // Centering the content vertically
@@ -179,7 +190,8 @@ class _RegisterPageState extends State<RegisterPage> {
                       backgroundColor: MaterialStateProperty.all(
                           const Color.fromRGBO(17, 84, 19, 1)),
                     ),
-                    child: const Text('Sign Up'),
+                    child: const Text('Sign Up',
+                        style: TextStyle(color: Colors.white)),
                   ),
                 ),
               ],
