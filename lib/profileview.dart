@@ -13,11 +13,9 @@ class CreateProfilePage extends StatefulWidget {
 class _CreateProfilePageState extends State<CreateProfilePage> {
   XFile? _selectedImage;
   final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _farmNameController = TextEditingController();
-  final TextEditingController _countryController = TextEditingController();
-  final TextEditingController _stateController = TextEditingController();
-  final TextEditingController _cityController = TextEditingController();
-  final TextEditingController _pincodeController = TextEditingController();
+  final TextEditingController _passController = TextEditingController();
+  // ignore: non_constant_identifier_names
+  final TextEditingController _MailController = TextEditingController();
 
   Future<void> _selectImage() async {
     final ImagePicker picker = ImagePicker();
@@ -48,9 +46,14 @@ class _CreateProfilePageState extends State<CreateProfilePage> {
         title: const Text(
           "Create Profile",
           style: TextStyle(
-            fontFamily: 'Times New Roman',
+            // fontFamily: 'Times New Roman',
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
           ),
         ),
+        automaticallyImplyLeading: false,
+        centerTitle: false, // Center the title
+        backgroundColor: const Color.fromARGB(255, 1, 71, 27),
         actions: [
           IconButton(
             icon: const Icon(Icons.more_vert),
@@ -59,8 +62,6 @@ class _CreateProfilePageState extends State<CreateProfilePage> {
             },
           ),
         ],
-        backgroundColor: Colors.white,
-        elevation: 0,
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
@@ -111,47 +112,23 @@ class _CreateProfilePageState extends State<CreateProfilePage> {
             TextField(
               controller: _nameController,
               decoration: const InputDecoration(
-                labelText: 'Name',
+                labelText: 'Username',
                 border: OutlineInputBorder(),
               ),
             ),
             const SizedBox(height: 16.0),
             TextField(
-              controller: _farmNameController,
+              controller: _MailController,
               decoration: const InputDecoration(
-                labelText: 'Farm Name',
+                labelText: 'email',
                 border: OutlineInputBorder(),
               ),
             ),
             const SizedBox(height: 16.0),
             TextField(
-              controller: _countryController,
+              controller: _passController,
               decoration: const InputDecoration(
-                labelText: 'Country',
-                border: OutlineInputBorder(),
-              ),
-            ),
-            const SizedBox(height: 16.0),
-            TextField(
-              controller: _stateController,
-              decoration: const InputDecoration(
-                labelText: 'State',
-                border: OutlineInputBorder(),
-              ),
-            ),
-            const SizedBox(height: 16.0),
-            TextField(
-              controller: _cityController,
-              decoration: const InputDecoration(
-                labelText: 'City',
-                border: OutlineInputBorder(),
-              ),
-            ),
-            const SizedBox(height: 16.0),
-            TextField(
-              controller: _pincodeController,
-              decoration: const InputDecoration(
-                labelText: 'Pincode',
+                labelText: 'password',
                 border: OutlineInputBorder(),
               ),
             ),
@@ -159,13 +136,13 @@ class _CreateProfilePageState extends State<CreateProfilePage> {
             ElevatedButton(
               onPressed: _validateAndRegister,
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.green[900],
+                backgroundColor: const Color.fromARGB(255, 16, 79, 18),
                 padding: const EdgeInsets.symmetric(vertical: 15.0),
               ),
               child: const Text(
                 'Register',
                 style: TextStyle(
-                  fontFamily: 'Times New Roman',
+                  // fontFamily: 'Times New Roman',
                   fontSize: 16.0,
                   color: Colors.white,
                 ),

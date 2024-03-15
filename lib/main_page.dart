@@ -16,7 +16,6 @@ class MainPage extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-
         automaticallyImplyLeading: false,
         centerTitle: false, // Center the title
         backgroundColor: const Color.fromARGB(
@@ -69,17 +68,28 @@ class MainPage extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 20),
-            ButtonBox(
-              icon: Icons.terrain,
-              label: 'Find your crop',
-              onPressed: () {
-                // Navigate to soil testing page
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const SoilTestingPage()),
-                );
-              },
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: Column(
+                    children: [
+                      ButtonBox(
+                        icon: Icons.terrain,
+                        label: 'Find your crop',
+                        onPressed: () {
+                          // Navigate to soil testing page
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const SoilTestingPage()),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ],
         ),
@@ -122,13 +132,9 @@ class ButtonBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Calculate the width of the button based on the length of the label
-    double buttonWidth =
-        label.length * 12.0 + 40.0; // Adjust the multiplier as needed
-
     return SizedBox(
-      width: buttonWidth,
-      height: 120,
+      width: 120,
+      height: 100,
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
@@ -146,7 +152,6 @@ class ButtonBox extends StatelessWidget {
               color: Colors.white,
             ),
             const SizedBox(height: 8),
-            // Adjust the textAlign to center the text
             Text(
               label,
               textAlign: TextAlign.center,

@@ -166,7 +166,8 @@ class _LoginPageState extends State<LoginPage> {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
                 ),
-                child: const Text('Login'),
+                child:
+                    const Text('Login', style: TextStyle(color: Colors.white)),
               ),
             ),
             const SizedBox(height: 20),
