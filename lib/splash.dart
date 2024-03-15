@@ -4,6 +4,7 @@ class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _SplashScreenState createState() => _SplashScreenState();
 }
 
@@ -21,8 +22,8 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:
-          Color.fromARGB(255, 4, 30, 51), // Change background color to blue
+      backgroundColor: const Color.fromARGB(
+          255, 4, 30, 51), // Change background color to blue
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -36,8 +37,8 @@ class _SplashScreenState extends State<SplashScreen> {
                 height: 200, // Adjust as needed
               ),
             ),
-            SizedBox(height: 20),
-            Text(
+            const SizedBox(height: 20),
+            const Text(
               'FarmSage',
               style: TextStyle(
                 fontSize: 24.0,
