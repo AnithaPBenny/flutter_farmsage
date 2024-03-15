@@ -27,14 +27,6 @@ class SettingsPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // const Text(
-            //   'Account Settings',
-            //   style: TextStyle(
-            //     fontSize: 24,
-            //     fontWeight: FontWeight.bold,
-            //     color: Color.fromARGB(255, 18, 82, 20),
-            //   ),
-            // ),
             const SizedBox(height: 20),
             ElevatedButton.icon(
               onPressed: () {
@@ -52,7 +44,7 @@ class SettingsPage extends StatelessWidget {
                 ),
               ),
               icon: const Icon(Icons.person, color: Colors.white),
-              label: const Text('Profile View',
+              label: const Text('Upadate Profile',
                   style: TextStyle(color: Colors.white)),
             ),
             const SizedBox(height: 10),

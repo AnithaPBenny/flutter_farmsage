@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -15,7 +16,7 @@ class _CreateProfilePageState extends State<CreateProfilePage> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _passController = TextEditingController();
   // ignore: non_constant_identifier_names
-  final TextEditingController _MailController = TextEditingController();
+  final TextEditingController _mailController = TextEditingController();
 
   Future<void> _selectImage() async {
     final ImagePicker picker = ImagePicker();
@@ -31,6 +32,46 @@ class _CreateProfilePageState extends State<CreateProfilePage> {
   void _validateAndRegister() {
     // Add your registration logic here
     // You can access the entered values using the controllers (_nameController.text, etc.)
+
+    // Get the entered values
+    String name = _nameController.text;
+    String email = _mailController.text;
+    String password = _passController.text;
+
+    // Here, you can insert the data into the user node in the database
+    _insertUserData(name, email, password);
+
+    // Show alert for successful update
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Success'),
+          content: const Text('Data updated successfully.'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _insertUserData(String name, String email, String password) {
+    // Get the current user ID
+    String userId = FirebaseAuth.instance.currentUser!.uid;
+
+    // Push the user data to the database under the user node
+    var _database;
+    _database.child('users').child(userId).set({
+      'name': name,
+      'email': email,
+      'password': password,
+    });
   }
 
   @override
@@ -44,7 +85,7 @@ class _CreateProfilePageState extends State<CreateProfilePage> {
           },
         ),
         title: const Text(
-          "Create Profile",
+          "Update Profile",
           style: TextStyle(
             // fontFamily: 'Times New Roman',
             color: Colors.white,
@@ -118,7 +159,7 @@ class _CreateProfilePageState extends State<CreateProfilePage> {
             ),
             const SizedBox(height: 16.0),
             TextField(
-              controller: _MailController,
+              controller: _mailController,
               decoration: const InputDecoration(
                 labelText: 'email',
                 border: OutlineInputBorder(),
@@ -140,7 +181,7 @@ class _CreateProfilePageState extends State<CreateProfilePage> {
                 padding: const EdgeInsets.symmetric(vertical: 15.0),
               ),
               child: const Text(
-                'Register',
+                'Update',
                 style: TextStyle(
                   // fontFamily: 'Times New Roman',
                   fontSize: 16.0,

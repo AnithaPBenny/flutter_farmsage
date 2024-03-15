@@ -24,8 +24,15 @@ class _SoilTestingPageState extends State<SoilTestingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Soil Testing'),
-        automaticallyImplyLeading: false,
+        title: const Text(
+          'Soil Testing',
+          style: TextStyle(
+            // fontFamily: 'Times New Roman',
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        // automaticallyImplyLeading: false,
         backgroundColor:
             const Color.fromARGB(255, 21, 71, 23), // Set app bar color to green
       ),
@@ -74,7 +81,14 @@ class _SoilTestingPageState extends State<SoilTestingPage> {
                     backgroundColor: const Color.fromARGB(
                         255, 21, 71, 23), // Change button color to green
                   ),
-                  child: const Text('Find'),
+                  child: const Text(
+                    'Find',
+                    style: TextStyle(
+                      // fontFamily: 'Times New Roman',
+                      fontSize: 16.0,
+                      color: Colors.white,
+                    ),
+                  ),
                 ),
               ),
             ],
