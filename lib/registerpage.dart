@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_farmsage/main_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -14,8 +13,8 @@ class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController =
       TextEditingController();
-  final TextEditingController _phoneNumberController = TextEditingController();
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  bool showPassword = false;
 
   @override
   Widget build(BuildContext context) {
@@ -47,17 +46,17 @@ class _RegisterPageState extends State<RegisterPage> {
                   icon: Icons.email,
                 ),
                 const SizedBox(height: 10.0),
-                _buildInputBox(
+                _buildPasswordInputBox(
                   labelText: 'Password',
                   controller: _passwordController,
-                  obscureText: true,
+                  obscureText: !showPassword,
                   icon: Icons.lock,
                 ),
                 const SizedBox(height: 10.0),
-                _buildInputBox(
+                _buildPasswordInputBox(
                   labelText: 'Confirm Password',
                   controller: _confirmPasswordController,
-                  obscureText: true,
+                  obscureText: !showPassword,
                   icon: Icons.lock,
                 ),
                 const SizedBox(height: 20.0),
@@ -67,9 +66,56 @@ class _RegisterPageState extends State<RegisterPage> {
                       String email = _emailController.text;
                       String password = _passwordController.text;
 
+                      if (email.isEmpty || password.isEmpty) {
+                        // Fields are empty
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: const Text('Error'),
+                              content: const Text('Please fill in all fields.'),
+                              actions: [
+                                TextButton(
+                                  child: const Text('OK'),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                        return;
+                      }
+
                       if (_passwordController.text !=
                           _confirmPasswordController.text) {
                         // Passwords do not match
+                        return;
+                      }
+
+                      // Validate email format
+                      if (!RegExp(
+                              r'^[\w-]+(\.[\w-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,})$')
+                          .hasMatch(email)) {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: const Text('Error'),
+                              content: const Text(
+                                  'Please enter a valid email address.'),
+                              actions: [
+                                TextButton(
+                                  child: const Text('OK'),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                              ],
+                            );
+                          },
+                        );
                         return;
                       }
 
@@ -84,6 +130,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           await userCredential.user!.sendEmailVerification();
                           // Show alert dialog to inform the user to verify their email
                           showDialog(
+                            // ignore: use_build_context_synchronously
                             context: context,
                             builder: (BuildContext context) {
                               return AlertDialog(
@@ -102,13 +149,27 @@ class _RegisterPageState extends State<RegisterPage> {
                             },
                           );
                           return;
+                        } else {
+                          // User is already registered
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: const Text('Error'),
+                                content:
+                                    const Text('User is already registered.'),
+                                actions: [
+                                  TextButton(
+                                    child: const Text('OK'),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                ],
+                              );
+                            },
+                          );
                         }
-
-                        // // If successful, navigate to main page
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(builder: (context) => MainPage()),
-                        // );
                       } catch (e) {
                         // Handle errors
                         print(e);
@@ -154,6 +215,47 @@ class _RegisterPageState extends State<RegisterPage> {
               decoration: InputDecoration(
                 border: InputBorder.none,
                 labelText: labelText,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildPasswordInputBox({
+    required String labelText,
+    required TextEditingController controller,
+    bool obscureText = false,
+    IconData? icon,
+  }) {
+    return Container(
+      padding: const EdgeInsets.all(10.0),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.grey),
+        borderRadius: BorderRadius.circular(5.0),
+      ),
+      child: Row(
+        children: [
+          Icon(icon),
+          const SizedBox(width: 10),
+          Expanded(
+            child: TextFormField(
+              controller: controller,
+              obscureText: obscureText,
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                labelText: labelText,
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    showPassword ? Icons.visibility : Icons.visibility_off,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      showPassword = !showPassword;
+                    });
+                  },
+                ),
               ),
             ),
           ),
