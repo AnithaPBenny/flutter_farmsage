@@ -11,21 +11,30 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Account Settings'),
+        title: const Text(
+          'Account Settings',
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        automaticallyImplyLeading: false,
+        centerTitle: false, // Center the title
+        backgroundColor: const Color.fromARGB(255, 1, 71, 27),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const Text(
-              'Account Settings',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-            ),
+            // const Text(
+            //   'Account Settings',
+            //   style: TextStyle(
+            //     fontSize: 24,
+            //     fontWeight: FontWeight.bold,
+            //     color: Color.fromARGB(255, 18, 82, 20),
+            //   ),
+            // ),
             const SizedBox(height: 20),
             ElevatedButton.icon(
               onPressed: () {
@@ -42,8 +51,7 @@ class SettingsPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8.0),
                 ),
               ),
-              icon: const Icon(Icons.person,
-                  color: Colors.white), // Changed icon color to white
+              icon: const Icon(Icons.person, color: Colors.white),
               label: const Text('Profile View',
                   style: TextStyle(color: Colors.white)),
             ),
@@ -59,8 +67,7 @@ class SettingsPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8.0),
                 ),
               ),
-              icon: const Icon(Icons.notifications,
-                  color: Colors.white), // Changed icon color to white
+              icon: const Icon(Icons.notifications, color: Colors.white),
               label: const Text('Notifications',
                   style: TextStyle(color: Colors.white)),
             ),
@@ -76,8 +83,7 @@ class SettingsPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8.0),
                 ),
               ),
-              icon: const Icon(Icons.language,
-                  color: Colors.white), // Changed icon color to white
+              icon: const Icon(Icons.language, color: Colors.white),
               label:
                   const Text('Language', style: TextStyle(color: Colors.white)),
             ),
@@ -104,9 +110,10 @@ class SettingsPage extends StatelessWidget {
             ElevatedButton.icon(
               onPressed: () {
                 // Handle logout button press
-                Navigator.pushReplacement(
+                Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(builder: (context) => LoginPage()),
+                  (route) => false, // Clear the navigation history
                 );
               },
               style: ElevatedButton.styleFrom(
@@ -116,8 +123,7 @@ class SettingsPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8.0),
                 ),
               ),
-              icon: const Icon(Icons.logout,
-                  color: Colors.white), // Changed icon color to white
+              icon: const Icon(Icons.logout, color: Colors.white),
               label:
                   const Text('Logout', style: TextStyle(color: Colors.white)),
             ),

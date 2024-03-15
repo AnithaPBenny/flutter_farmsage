@@ -9,7 +9,14 @@ class MainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Hello!'),
+        title: const Text(
+          'Hello!',
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+
         automaticallyImplyLeading: false,
         centerTitle: false, // Center the title
         backgroundColor: const Color.fromARGB(
@@ -115,8 +122,12 @@ class ButtonBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Calculate the width of the button based on the length of the label
+    double buttonWidth =
+        label.length * 12.0 + 40.0; // Adjust the multiplier as needed
+
     return SizedBox(
-      width: 120,
+      width: buttonWidth,
       height: 120,
       child: ElevatedButton(
         onPressed: onPressed,
@@ -135,8 +146,10 @@ class ButtonBox extends StatelessWidget {
               color: Colors.white,
             ),
             const SizedBox(height: 8),
+            // Adjust the textAlign to center the text
             Text(
               label,
+              textAlign: TextAlign.center,
               style: const TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,

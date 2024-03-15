@@ -1,16 +1,19 @@
-// ignore_for_file: use_key_in_widget_constructors
-
 import 'package:flutter/material.dart';
 import 'package:flutter_farmsage/registerpage.dart';
 import 'package:flutter_farmsage/main_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-// ignore: must_be_immutable
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   LoginPage({Key? key}) : super(key: key);
-  // Your code here
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  bool showPassword = false;
+
   Future<void> loginWithEmailAndPassword(BuildContext context) async {
     try {
       String email = usernameController.text.trim(); // Trim whitespace
@@ -37,7 +40,6 @@ class LoginPage extends StatelessWidget {
         );
         return;
       }
-
       // Validate email format
       if (!RegExp(
               r'^[\w-]+(\.[\w-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,})$')
@@ -67,31 +69,6 @@ class LoginPage extends StatelessWidget {
         email: email,
         password: password,
       );
-
-      // if (!userCredential.user!.emailVerified) {
-      //   // If email is not verified, send verification email
-      //   await userCredential.user!.sendEmailVerification();
-      //   // Show alert dialog to inform the user to verify their email
-      //   showDialog(
-      //     context: context,
-      //     builder: (BuildContext context) {
-      //       return AlertDialog(
-      //         title: const Text('Verify your email'),
-      //         content: const Text(
-      //             'A verification email has been sent to your email address. Please verify your email before proceeding.'),
-      //         actions: [
-      //           TextButton(
-      //             child: const Text('OK'),
-      //             onPressed: () {
-      //               Navigator.of(context).pop();
-      //             },
-      //           ),
-      //         ],
-      //       );
-      //     },
-      //   );
-      //   return;
-      // }
 
       // User successfully logged in
       // Navigate to MainPage when login button is pressed
@@ -158,19 +135,28 @@ class LoginPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-            TextField(
+            TextFormField(
               controller: passwordController,
-              obscureText: true,
-              decoration: const InputDecoration(
+              obscureText: !showPassword,
+              decoration: InputDecoration(
                 labelText: 'Password',
                 hintText: 'Enter your password',
                 border: OutlineInputBorder(),
-                prefixIcon: Icon(Icons.lock),
+                prefixIcon: const Icon(Icons.lock),
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    showPassword ? Icons.visibility : Icons.visibility_off,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      showPassword = !showPassword;
+                    });
+                  },
+                ),
               ),
             ),
             const SizedBox(height: 20),
             Center(
-              // Centering the login button
               child: ElevatedButton(
                 onPressed: () {
                   loginWithEmailAndPassword(context);
